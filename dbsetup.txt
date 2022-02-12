@@ -1,0 +1,2 @@
+use app
+db.createCollection("character_sheets")
