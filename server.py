@@ -40,6 +40,3 @@ class CallDatabase:
 
     def store_data(self, key, value):
         pass
-
-    def disconnect(self):
-        pass
