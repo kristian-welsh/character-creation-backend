@@ -3,6 +3,8 @@ from flask_cors import CORS, cross_origin
 import pymongo
 from pymongo import MongoClient
 
+IP = "127.0.0.1"
+PORT = 27017
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -14,19 +16,20 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def endpoint():
     print(str(request.data))
 
-    print("json")
+    print("json")   
     print(str(request.get_json()))
     print(str(request.get_json()["name"]))
-    req_dict = str(request.get_json())
+    req_dict = request.get_json()
 
-    database = CallDatabase("127.0.0.1", "27017", "/app")
+    database = CallDatabase(IP, PORT, "/app")
     database.connect()
-    database.store_data("character_name", req_dict["name"])
+    id = database.store_data("character_name", req_dict["name"])
+    print(id)
     database.disconnect()
 
     name = req_dict["name"]
 
-    return '{ "message": "its really actually worked" }'
+    return '{ "_id": "' + str(id) + '" }'
 
 class CallDatabase:
 
@@ -35,11 +38,21 @@ class CallDatabase:
         self.port = port
         self.db_name = db_name
     def connect(self):
-        client = MongoClient(self.host, self.port)
-        db = client.app
+        self.client = MongoClient(self.host, self.port)
+        self.db = self.client.app
 
     def store_data(self, key, value):
-        pass
+        new_doc = self.db["character_sheets"]
+        try:
+            result = new_doc.insert_one({
+                key: value
+            })
+            return result.inserted_id
+
+        except Exception as e:
+            print(e)
+            print("Failed to add data to the collection.")
+        return -1
 
     def disconnect(self):
-        pass
+        self.client.close()
