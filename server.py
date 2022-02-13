@@ -3,6 +3,8 @@ from flask_cors import CORS, cross_origin
 import pymongo
 from pymongo import MongoClient
 
+IP = "127.0.0.1"
+PORT = 27017
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -19,7 +21,7 @@ def endpoint():
     print(str(request.get_json()["name"]))
     req_dict = request.get_json()
 
-    database = CallDatabase("127.0.0.1", 27017, "/app")
+    database = CallDatabase(IP, PORT, "/app")
     database.connect()
     id = database.store_data("character_name", req_dict["name"])
     print(id)
