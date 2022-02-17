@@ -14,11 +14,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @app.route("/endpoint", methods=['POST'])
 @cross_origin()
 def endpoint():
-    print(str(request.data))
-
-    print("json")   
-    print(str(request.get_json()))
-    print(str(request.get_json()["name"]))
+    
+    print("Endpoint reached.")
     req_dict = request.get_json()
 
     database = CallDatabase(IP, PORT, "/app")
@@ -26,8 +23,6 @@ def endpoint():
     id = database.store_data("character_name", req_dict["name"])
     print(id)
     database.disconnect()
-
-    name = req_dict["name"]
 
     return '{ "_id": "' + str(id) + '" }'
 
@@ -42,13 +37,12 @@ class CallDatabase:
         self.db = self.client.app
 
     def store_data(self, key, value):
-        new_doc = self.db["character_sheets"]
+        new_cl = self.db["character_sheets"]
         try:
-            result = new_doc.insert_one({
+            result = new_cl.insert_one({
                 key: value
             })
             return result.inserted_id
-
         except Exception as e:
             print(e)
             print("Failed to add data to the collection.")
