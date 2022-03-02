@@ -11,6 +11,7 @@ cors = CORS(app)
 
 app.config['CORS_HEADERS'] = 'Content-Type'
 
+print("server.py defining endpoint")
 @app.route("/endpoint", methods=['POST'])
 @cross_origin()
 def endpoint():
@@ -24,6 +25,7 @@ def endpoint():
     print(id)
     database.disconnect()
 
+    print("responding to request")
     return '{ "_id": "' + str(id) + '" }'
 
 class CallDatabase:
@@ -33,6 +35,7 @@ class CallDatabase:
         self.port = port
         self.db_name = db_name
     def connect(self):
+        print("connecting to database")
         self.client = MongoClient(self.host, self.port)
         self.db = self.client.app
 
