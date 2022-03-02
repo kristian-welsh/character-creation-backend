@@ -10,4 +10,4 @@ EXPOSE 5000
 
 COPY . .
 RUN export FLASK_APP=server
-CMD ["python", "-m", "flask", "run"]
+CMD ["python", "-m", "flask", "run"]doc
