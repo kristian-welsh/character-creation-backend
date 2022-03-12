@@ -1,0 +1,1 @@
+docker run -t --name db mongo:latest
