@@ -17,16 +17,17 @@ print("server.py defining endpoint")
 def endpoint():
     
     print("Endpoint reached.")
-    req_dict = request.get_json()
+    #req_dict = request.get_json()
 
-    database = CallDatabase(IP, PORT, "/app")
-    database.connect()
-    id = database.store_data("character_name", req_dict["name"])
-    print(id)
-    database.disconnect()
+    #database = CallDatabase(IP, PORT, "/app")
+    #database.connect()
+    #id = database.store_data("character_name", req_dict["name"])
+    #print(id)
+    #database.disconnect()
 
-    print("responding to request")
-    return '{ "_id": "' + str(id) + '" }'
+    #print("responding to request")
+    #return '{ "_id": "' + str(id) + '" }'
+    return '{ "_id": "1234567890" }'
 
 class CallDatabase:
 
