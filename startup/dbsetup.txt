@@ -8,3 +8,4 @@ running the database:
 1) mongod --dbpath ./data
 In seperate terminal run:
 2) mongo
+
