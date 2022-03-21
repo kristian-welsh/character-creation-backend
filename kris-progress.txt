@@ -1,0 +1,14 @@
+this text file will document my progress on docker debugging between sessions
+
+# success #1
+I noticed that by using -p 5000:5000 flask would be available on localhost
+In the front end I changed the endpoint's host to match, and it worked
+these are the commands I used in that position.
+
+docker run -dit --rm --network thingnet --name frontend -p 3000:3000 react
+docker run -dit --rm --network thingnet --name db --network-alias db mongo
+docker run -dit --rm --network thingnet --name backend -p 5000:5000 --env-file .env flask
+
+I am not 100% satisfied with this, as it assumes the server is running on the 
+machine viewing the webpage. 
+
