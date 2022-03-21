@@ -5,7 +5,7 @@ from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 
 # Mongo docker container IP
-IP = "172.17.0.2"
+IP = "db"
 PORT = 27017
 
 app = Flask(__name__)
