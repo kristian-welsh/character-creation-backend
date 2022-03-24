@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  frontend:
+    image: react
+    tty: true
+    ports: 
+      - "3000:3000"
+    networks: 
+      - thingnet
+    container_name: frontend
+  backend:
+    image: flask
+    tty: true
+    ports:
+      - "5000:5000"
+    networks: 
+      - thingnet
+    env_file: 
+      - .env
+    container_name: backend
+  db:
+    image: mongo
+    networks: 
+      - thingnet
+    container_name: db
+networks:
+  thingnet:
