@@ -4,22 +4,32 @@ This is a reference for docker startup commands.
 Webserver for frontend, python flask running for backend, mongo running as database.
 See relevant sections below.
 
-## Network
+## Run
+
+### Network
 
 docker network create --driver bridge thingnet
 
-## Frontend
+### Frontend
 
 docker build --tag react .
-docker run -dit --rm --network thingnet --name frontend -p 3000:3000 react
+docker run -ditp 3000:3000 --network thingnet --rm --name frontend react
 
-## Backend
+### Backend
 
 docker build --tag flask .
-docker run -dit --rm --network thingnet --name backend -p 5000:5000 --env-file .env flask
+docker run -ditp 5000:5000 --env-file .env --rm --network thingnet --name backend flask
 
-## Mongo
+### Mongo
 
-docker pull mongo
-docker run -dit --rm --network thingnet --name db mongo
+docker run -dit --network thingnet --rm --name db mongo:latest
 
+## Volume
+
+docker volume create mountain
+
+## Compose
+
+docker compose up -d
+
+docker compose down
