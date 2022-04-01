@@ -29,13 +29,14 @@ def endpoint():
         id = database.store_data("character_name", req_dict["name"])
         print("Finishing data query here")
         print(id)
+        all_contents = database.temp_all_contents()
         database.disconnect()
         print("Disconnected from database")
     except:
         print("Couldn't connect to database")
 
     print("responding to request")
-    return '{ "_id": "' + str(id) + '" }'
+    return '{ "_id": "' + str(id) + '", "db_contents": "' + str(all_contents) + '" }'
     #return '{ "_id": "1234567890" }'
 
 class CallDatabase:
@@ -70,6 +71,18 @@ class CallDatabase:
         except Exception as e:
             print(e)
             print("Failed to add data to the collection.")
+        return -1
+
+    def temp_all_contents(self):
+        new_cl = self.db["character_sheets"]
+        try:
+            results = new_cl.find()
+            print(results)
+            print(type(results))
+            return str(results)
+        except Exception as e:
+            print(e)
+            print("Failed to find data from the collection.")
         return -1
 
     def disconnect(self):

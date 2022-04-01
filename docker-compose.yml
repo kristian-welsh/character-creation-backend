@@ -1,4 +1,5 @@
 version: "3.9"
+
 services:
   frontend:
     image: react
@@ -16,5 +17,12 @@ services:
     image: mongo
     networks: 
       - thingnet
+    volumes:
+      - mountain:/usr/games
+
 networks:
   thingnet:
+
+volumes:
+  mountain:
+    # external: true
