@@ -1,8 +1,6 @@
-(TODO - WILL COME BACK TO LATER)
-
 # Character Creation Web App - Backend
 
-char creaiton wewb app - manaage rpg characater online. creative expression... managing ideas...
+char creaiton webapp - manaage rpg characater online. creative expression... managing ideas...
 develop skills in dedveloping full stack application from scratch + passion project...
 
 this is a rest driven backend server providing the database persistence and business logic for char creation.
