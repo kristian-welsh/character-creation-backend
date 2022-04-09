@@ -18,24 +18,18 @@ for notes on deploying the project on a live system.
 
 ### Prerequisites
 
-mongodb installed
+mongodb 
 python + flask
 pip
 docker
-+ versions
-+ links to website
-
-Requirements for the software and other tools to build, test and push 
-- [Example 1](https://www.example.com)
-- [Example 2](https://www.example.com)
 
 ### Installing
 
-With docker:
+**With docker**
 
 docker compose up
 
-Running without docker:
+**Running without docker**
 
 pip -r install requirements.txt
 pip -m flask run
@@ -44,8 +38,9 @@ Then you can start sending REST requests against localhost:5000
 
 ## Contributing
 
-We would love for anyone to submit pull requests with improvements. Please try to match the styles we have kept to.
-Subject to our review.
+We would love for you to submit pull requests with improvements.
+Please try to match the existing code style.
+Subject to review.
 
 ## License
 
@@ -53,5 +48,5 @@ This project is licensed under the Creative Commons License.
 
 ## Acknowledgments
 
-We appreciate GitHub as a service to make development and collaboration easier.
+We would like to thank GitHub as a service to enable colaberative development.
 Thank you to the contributers of our dependancies.
