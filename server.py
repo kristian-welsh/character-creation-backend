@@ -28,7 +28,7 @@ def endpoint():
         id = database.store_data("character_details", req)
         print("-- Finishing data query here --")
         print(id)
-        all_contents = database.temp_all_contents()
+        all_contents = database.log_all_data()
         database.disconnect()
         print("Disconnected from database")
     except:
@@ -60,19 +60,26 @@ class CallDatabase:
         except ConnectionFailure:
             print("Database not avaliable")
 
-    def store_data(self, key, value):
+    # def store_data(self, key, value):
+    def store_data(self, req_dict):
         new_cl = self.db["character_sheets"]
         try:
             result = new_cl.insert_one({
-                key: value
+                "character_name": req_dict["name"],
+                "character_level": req_dict["level"]
             })
             return result.inserted_id
+            #name = [{"character_name": req_dict["name"]}]
+            #insert_list = [{"character_name": req_dict["name"], "character_level": req_dict["level"]}]
+            #result = new_cl.insert_many(insert_list)
+            #result = new_cl.insert_one(name)
+            # return result.inserted_ids
         except Exception as e:
             print(e)
             print("Failed to add data to the collection.")
         return -1
 
-    def temp_all_contents(self):
+    def log_all_data(self):
         new_cl = self.db["character_sheets"]
         try:
             results = []
