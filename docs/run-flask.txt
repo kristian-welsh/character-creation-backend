@@ -1,0 +1,9 @@
+## WINDOWS
+
+set FLASK_APP=server.py
+flask run
+
+## BASH
+
+export FLASK_APP=server.py
+python -m flask run
