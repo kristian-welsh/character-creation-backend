@@ -6,6 +6,8 @@ See relevant sections below.
 
 ## Run
 
+docker run -it -p 0.0.0.0:5432:5000 --env-file .env --network=host --name backend do-backend -
+
 ### Network
 
 docker network create --driver bridge thingnet

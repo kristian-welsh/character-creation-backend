@@ -1,33 +1,33 @@
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
-import pymongo
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 
-# Mongo docker container IP
-IP = "db"
-PORT = 27017
+MONGO_DOCKER_IP = "db"
+MONGO_DOCKER_PORT = 27017
 
 app = Flask(__name__)
 cors = CORS(app)
-
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-print("server.py defining endpoint")
+
 @app.route("/endpoint", methods=['POST'])
 @cross_origin()
 def endpoint():
-    
-    print("Endpoint reached.")
+
+    print("---------------------------")
+    print("Character endpoint reached.")
+    print("---------------------------")
+
     req_dict = request.get_json()
 
     try:
-        database = CallDatabase(IP, PORT, "/app")
+        database = CallDatabase(MONGO_DOCKER_IP, MONGO_DOCKER_PORT, "/app")
         database.connect()
         print("Connected to database")
-        print("QQQQQ Starting data query")
+        print("-- Starting data query --")
         id = database.store_data("character_name", req_dict["name"])
-        print("Finishing data query here")
+        print("-- Finishing data query here --")
         print(id)
         all_contents = database.temp_all_contents()
         database.disconnect()
@@ -37,7 +37,7 @@ def endpoint():
 
     print("responding to request")
     return '{ "_id": "' + str(id) + '", "db_contents": "' + str(all_contents) + '" }'
-    #return '{ "_id": "1234567890" }'
+
 
 class CallDatabase:
 
