@@ -3,8 +3,7 @@ from flask_cors import CORS, cross_origin
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 
-MONGO_DOCKER_IP = "db"
-MONGO_DOCKER_PORT = 27017
+MONGO_PORT = 27017
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -19,14 +18,14 @@ def endpoint():
     print("Character endpoint reached.")
     print("---------------------------")
 
-    req_dict = request.get_json()
+    req = request.get_json()
 
     try:
-        database = CallDatabase(MONGO_DOCKER_IP, MONGO_DOCKER_PORT, "/app")
+        database = CallDatabase('localhost', MONGO_PORT, "/app")
         database.connect()
         print("Connected to database")
         print("-- Starting data query --")
-        id = database.store_data("character_name", req_dict["name"])
+        id = database.store_data("character_details", req)
         print("-- Finishing data query here --")
         print(id)
         all_contents = database.temp_all_contents()
@@ -76,10 +75,10 @@ class CallDatabase:
     def temp_all_contents(self):
         new_cl = self.db["character_sheets"]
         try:
-            results = new_cl.find()
-            print(results)
-            print(type(results))
-            return str(results)
+            results = []
+            for i in new_cl.find():
+                results.append(i)
+            return results
         except Exception as e:
             print(e)
             print("Failed to find data from the collection.")

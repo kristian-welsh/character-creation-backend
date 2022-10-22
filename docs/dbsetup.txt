@@ -1,11 +1,11 @@
-Creating database and collection:
-------------------------------------
-use app
-db.createCollection("character_sheets")
-
 running the database:
 ---------------------
+(make sure /data folder exists)
 1) mongod --dbpath ./data
 In seperate terminal run:
 2) mongo
 
+Creating database and collection (in mongo terminal):
+------------------------------------
+use app
+db.createCollection("character_sheets")
