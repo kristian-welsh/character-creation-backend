@@ -31,11 +31,10 @@ def endpoint():
         all_contents = database.log_all_data()
         database.disconnect()
         print("Disconnected from database")
+        return '{ "_id": "' + str(id) + '", "db_contents": "' + str(all_contents) + '" }'
     except:
         print("Couldn't connect to database")
-
-    print("responding to request")
-    return '{ "_id": "' + str(id) + '", "db_contents": "' + str(all_contents) + '" }'
+        return "Couldn't connect to database"
 
 
 class CallDatabase:
@@ -69,10 +68,10 @@ class CallDatabase:
                 "character_level": req_dict["level"]
             })
             return result.inserted_id
-            #name = [{"character_name": req_dict["name"]}]
-            #insert_list = [{"character_name": req_dict["name"], "character_level": req_dict["level"]}]
-            #result = new_cl.insert_many(insert_list)
-            #result = new_cl.insert_one(name)
+            # name = [{"character_name": req_dict["name"]}]
+            # insert_list = [{"character_name": req_dict["name"], "character_level": req_dict["level"]}]
+            # result = new_cl.insert_many(insert_list)
+            # result = new_cl.insert_one(name)
             # return result.inserted_ids
         except Exception as e:
             print(e)
