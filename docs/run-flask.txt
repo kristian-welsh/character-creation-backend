@@ -3,7 +3,11 @@
 set FLASK_APP=server.py
 flask run
 
-## BASH
+## BASH SCRIPT
+
+bash run.sh
+
+## BASH RAW
 
 export FLASK_APP=server.py
 python -m flask run
